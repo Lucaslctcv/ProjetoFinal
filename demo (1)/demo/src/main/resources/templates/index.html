@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Eventos</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Eventos</h1>
+    <li><a href="/cadastrarEvento" class="waves-effect waves-light btn"><i class="material-icons left"></i>Cadastrar evento</a></li>
+    <div th:if="${mensagem}" class="card-panel teal lighten-2">
+        <span class="white-text" th:text="${mensagem}"></span>
+    </div>
+
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Ações</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="evento : ${evento}">
+            <td th:text="${evento.nome}"></td>
+            <td th:text="${evento.local}"></td>
+            <td th:text="${evento.data}"></td>
+            <td th:text="${evento.horario}"></td>
+
+            <td>
+                <!-- Verifica se o código está sendo exibido -->
+                <a th:href="@{/editarEvento/{codigo}(codigo=${evento.codigo})}" class="btn yellow">Editar</a>
+                <a th:href="@{/deletarEvento(codigo=${evento.codigo})}" class="btn red">Deletar</a>
+            </td>
+
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
